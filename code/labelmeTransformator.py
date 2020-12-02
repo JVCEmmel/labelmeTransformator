@@ -150,7 +150,7 @@ if __name__ == "__main__":
     if os.path.isdir(path + "/labelme_jsons") == False:
         os.makedirs(path + "/labelme_jsons")
 
-    # copy pictures
+    # move json-files
     [shutil.move(path + "/" + element, path + "/labelme_jsons/" + element) for element in json_list]
 
     # final dump
