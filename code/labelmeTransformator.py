@@ -13,14 +13,7 @@ class Image:
         self.name = name
         self.height = height
         self.width = width
-
-    def print(self):
-        return '"height": {}\n,"width": {}\n,"id": {}\n,"file_name": {}\n'.format(
-            self.height,
-            self.width,
-            self.id,
-            self.name)
-
+    
     def convertToDictionary(self):
         imagedict = {}
         imagedict["height"] = self.height
@@ -39,12 +32,6 @@ class Category:
         self.id = id
         self.name = name
         self.supercategory = supercategory
-
-    def print(self):
-        return '"Supercategory: {}\n"id": {}\n"category": {}\n'.format(
-            self.supercategory,
-            self.id,
-            self.name)
     
     def convertToDictionary(self):
         categorydict = {}
@@ -67,16 +54,6 @@ class Polygon:
         self.segmentation = segmentation
         self.bbox = bbox
         self.area = area
-
-    def print(self):
-        return '"segmentation": {}\n"iscrowd": {}\n"area": {}\n"image_id": {}\n"bbox": {}\n"category_id": {}\n"id": {}\n'.format(
-            self.segmentation,
-            self.iscrowd,
-            self.area,
-            self.image_id,
-            self.bbox,
-            self.category_id,
-            self.id)
 
     def convertToDictionary(self):
         polygondict = {}
@@ -174,8 +151,7 @@ if __name__ == "__main__":
         os.makedirs(path + "/labelme_jsons")
 
     # copy pictures
-    for element in json_list:
-        [shutil.copyfile(path + "/" + element, path + "/labelme_jsons/" + element)]
+    [shutil.move(path + "/" + element, path + "/labelme_jsons/" + element) for element in json_list]
 
     # final dump
     with open(path + "/output.json", "w") as output_file:
